@@ -1,0 +1,36 @@
+version: "3"
+services:
+  accountoptions-postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=accountoptions
+    network_mode: "bridge"
+    ports:
+      - "5432:5432"
+  accountoptions-service:
+    image: kristijanmirceta/birocloud-accountoptions
+    environment:
+      - KUMULUZEE_DATASOURCES0_CONNECTIONURL=jdbc:postgresql://docker.for.mac.localhost:5432/accountoptions
+    ports:
+      - "8080:8080"
+    network_mode: "bridge"
+    depends_on:
+      - accountoptions-postgres
+  users-postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=users
+    network_mode: "bridge"
+    ports:
+      - "5433:5432"
+  users-service:
+    image: kristijanmirceta/birocloud-users
+    environment:
+      - KUMULUZEE_DATASOURCES0_CONNECTIONURL=jdbc:postgresql://docker.for.mac.localhost:5433/users
+    ports:
+      - "8082:8080"
+    network_mode: "bridge"
+    depends_on:
+      - users-postgres
