@@ -6,8 +6,6 @@
 
 ##### Vprašanja
 
-- When customer and orders service start to communicate there is an error regarding path to api operation and base url.
-
 - Kako se lahko na naslove servicov v config.yaml sklicujem po imenu servica in ne docker.for.mac.localhost?
 
 ### Vaja 2
