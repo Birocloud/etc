@@ -1,0 +1,22 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: postgres-users-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres-users
+    spec:
+      containers:
+        - image: postgres:latest
+          name: postgres-users
+          env:
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: POSTGRES_DB
+              value: users
+          ports:
+          - containerPort: 5432
+            protocol: TCP
